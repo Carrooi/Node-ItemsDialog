@@ -37,38 +37,37 @@ class Items
 
 
 	prepare: ->
-		header = $('<div>',
-			html: $('<span>' + Items.labels.title + '</span>')
-		)
-		@select = $('<select>',
-			html: $('<option value="">' + Items.labels.addTypeHint + '</option>'),
-			change: @onSelectChange
-		)
-		for name of @types
-			@addTypeToSelection(name)
+		if !@initialized
+			header = $('<div>',
+				html: $('<span>' + Items.labels.title + '</span>')
+			)
+			@select = $('<select>',
+				html: $('<option value="">' + Items.labels.addTypeHint + '</option>'),
+				change: @onSelectChange
+			)
+			for name of @types
+				@addTypeToSelection(name)
 
-		@select.appendTo(header)
+			@select.appendTo(header)
 
-		@dialog = new Dialog
-		@dialog.header = header
-		@dialog.content = $('<div class="container"></div>')
-		@dialog.addButton( Items.labels.okButton, =>
-			@dialog.hide()
-		)
+			@dialog = new Dialog
+			@dialog.header = header
+			@dialog.content = $('<div class="container"></div>')
+			@dialog.addButton( Items.labels.okButton, =>
+				@dialog.hide()
+			)
 
-		for name, items of @defaults
-			if items.length > 0
-				@addType(name)
-				for item in items
-					@addValue(name, item)
+			for name, items of @defaults
+				if items.length > 0
+					@addType(name)
+					for item in items
+						@addValue(name, item)
 
-		@initialized = true
+			@initialized = true
 
 
 	open: ->
-		if !@initialized
-			@prepare()
-
+		@prepare()
 		@dialog.show()
 
 
@@ -192,6 +191,9 @@ class Items
 		if el.get(0).nodeName.toLowerCase() != 'input' || el.attr('type') != 'text'
 			throw new Error 'Result: invalid element'
 
+		if el.val() != ''
+			@defaults = JSON.parse(el.val())
+
 		@resultElement = el
 
 
@@ -212,7 +214,8 @@ class Items
 			@resultElement.val(JSON.stringify(values))
 
 		if @summaryElement != null
-			@summaryElement.find('ul').html('')
+			list = @summaryElement.chilren('ul')
+			list.html('')
 			for name, items of values
 				type = $('<li>',
 					html: @types[name]
@@ -223,7 +226,7 @@ class Items
 						$('<li>' + item + '</li>').appendTo(ul)
 					ul.appendTo(type)
 
-				type.appendTo(@summaryElement.find('ul'))
+				type.appendTo(list)
 
 
 module.exports = Items

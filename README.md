@@ -46,6 +46,8 @@ This will return object which has got the same structure like `defaults` propert
 You can add text input into your form and connect it with items-dialog. Then after every change, data from `getValues` method
 will be added into your input. These data are "stringified".
 
+This works also in opposite direction. When this result input contains some data, they will be added into `defaults` property.
+
 ```
 items.setResultElement($('#myInputInForm'));
 ```
@@ -59,11 +61,23 @@ into this element.
 items.setSummaryElement($('mySummaryElement'));
 ```
 
+## Prepare component
+
+If you want to render for example summary immediately after some setup, you have to call method `prepare`.
+
+```
+items.prepare();
+```
+
 ## Example
 
 ![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
 
 ## Changelog
+
+* 1.0.2
+	+ Bug in rendering summary
+	+ Defaults from resume element
 
 * 1.0.1
 	+ Added missing example
