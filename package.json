@@ -1,0 +1,28 @@
+{
+	"name": "items-dialog",
+	"description": "Modal dialog for set items by type",
+	"version": "1.0.0",
+	"author": {
+		"name": "David Kudera",
+		"email": "sakren@gmail.com"
+	},
+	"keywords": [
+		"items",
+		"dialog",
+		"modal",
+		"window",
+		"browser"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:sakren/node-items-dialog.git"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": "*"
+	},
+	"main": "./lib/Items.js",
+	"dependencies": {
+		"modal-dialog": "latest"
+	}
+}
