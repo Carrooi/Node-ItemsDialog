@@ -214,7 +214,7 @@ class Items
 			@resultElement.val(JSON.stringify(values))
 
 		if @summaryElement != null
-			list = @summaryElement.chilren('ul')
+			list = @summaryElement.children('ul')
 			list.html('')
 			for name, items of values
 				type = $('<li>',
