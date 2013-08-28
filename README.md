@@ -61,9 +61,12 @@ items.setSummaryElement($('mySummaryElement'));
 
 ## Example
 
-
+![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
 
 ## Changelog
+
+* 1.0.1
+	+ Added missing example
 
 * 1.0.0
 	+ Initial version
