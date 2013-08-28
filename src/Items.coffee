@@ -4,6 +4,17 @@ try $ = require '$' catch err then $ = window.jQuery
 class Items
 
 
+	@labels =
+		title: 'Items'
+		addTypeHint: 'Add new type'
+		removeType: 'Remove'
+		okButton: 'OK'
+		writeItem: 'Please enter new item for %s'
+		removeItem: 'Remove'
+		editItem: 'Edit'
+		addItem: 'Add'
+
+
 	types: null
 
 	initialized: false
@@ -27,10 +38,10 @@ class Items
 
 	prepare: ->
 		header = $('<div>',
-			html: $('<span>Items</span>')
+			html: $('<span>' + Items.labels.title + '</span>')
 		)
 		@select = $('<select>',
-			html: $('<option value="">Add new type</option>'),
+			html: $('<option value="">' + Items.labels.addTypeHint + '</option>'),
 			change: @onSelectChange
 		)
 		for name of @types
@@ -41,7 +52,7 @@ class Items
 		@dialog = new Dialog
 		@dialog.header = header
 		@dialog.content = $('<div class="container"></div>')
-		@dialog.addButton( 'OK', =>
+		@dialog.addButton( Items.labels.okButton, =>
 			@dialog.hide()
 		)
 
@@ -83,18 +94,19 @@ class Items
 		)
 		$('<a>',
 			href: '#'
-			html: 'Add'
+			html: Items.labels.addItem
 			click: (e) =>
 				e.preventDefault()
 				name = $(e.target).closest('div.type').attr('data-name')
-				value = prompt('Please enter new item for ' + @types[name])
+				msg = Items.labels.writeItem.replace(/\%s/g, @types[name])
+				value = prompt(msg)
 				if value != '' && value != null
 					@addValue(name, value)
 		).appendTo(title)
 		title.append(' ')
 		$('<a>',
 			href: '#'
-			html: 'Remove'
+			html: Items.labels.removeType
 			click: (e) =>
 				e.preventDefault()
 				@removeType($(e.target).closest('div.type').attr('data-name'))
@@ -132,7 +144,7 @@ class Items
 		item.append(' ')
 		$('<a>',
 			href: '#'
-			html: 'Remove'
+			html: Items.labels.removeItem
 			click: (e) =>
 				e.preventDefault()
 				item.remove()
@@ -141,10 +153,11 @@ class Items
 		item.append(' ')
 		$('<a>',
 			href: '#'
-			html: 'Edit'
+			html: Items.labels.editItem
 			click: (e) =>
 				e.preventDefault()
-				value = prompt('Please enter new item for ' + @types[type], value)
+				msg = Items.labels.writeItem.replace(/\%s/g, @types[type])
+				value = prompt(msg, value)
 				if value != '' && value != null
 					item.find('span').html(value)
 					@refreshOutputs()
@@ -177,7 +190,7 @@ class Items
 	setResultElement: (el) ->
 		el = $(el)
 		if el.get(0).nodeName.toLowerCase() != 'input' || el.attr('type') != 'text'
-			throw new Error 'Resule: invalid element'
+			throw new Error 'Result: invalid element'
 
 		@resultElement = el
 
