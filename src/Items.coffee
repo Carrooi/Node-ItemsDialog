@@ -13,6 +13,7 @@ class Items
 		removeItem: 'Remove'
 		editItem: 'Edit'
 		addItem: 'Add'
+		help: 'There you can add new types. Just select it in menu above.'
 
 
 	types: null
@@ -57,7 +58,7 @@ class Items
 
 			@dialog = new Dialog
 			@dialog.header = header
-			@dialog.content = $('<div class="container"></div>')
+			@dialog.content = $('<div class="container"><div class="help">' + Items.labels.help + '</div></div>')
 			@dialog.addButton( Items.labels.okButton, =>
 				@dialog.hide()
 			)
@@ -80,6 +81,7 @@ class Items
 		if typeof @labels.removeItem == 'undefined' then @labels.removeItem = Items.labels.removeItem
 		if typeof @labels.editItem == 'undefined' then @labels.editItem = Items.labels.editItem
 		if typeof @labels.addItem == 'undefined' then @labels.addItem = Items.labels.addItem
+		if typeof @labels.help == 'undefined' then @labels.help = Items.labels.help
 
 
 	open: ->

@@ -95,6 +95,7 @@ items.labels.title = 'Add contacts';
 * `title`: Title of modal dialog
 * `okButton`: Button in the bottom of the modal dialog
 * `addTypeHint`: "prompt" text of first text in select input (eg. Please select something)
+* `help`: Text in the top of modal dialog content
 * `removeType`: Title of link for removing whole type
 * `writeItem`: Text in prompt dialog for writing new item in type. There you can use %s "variable" which will be replaced with selected type (eg. Please enter new item into %s type)
 * `addItem`: Title of link for adding new item into type
