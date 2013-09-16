@@ -1,7 +1,8 @@
 Dialog = require 'modal-dialog'
+EventEmitter = require('events').EventEmitter
 try $ = require '$' catch err then $ = window.jQuery
 
-class Items
+class Items extends EventEmitter
 
 
 	@labels =
@@ -42,6 +43,8 @@ class Items
 
 	prepare: ->
 		if !@initialized
+			@emit 'beforeRender', @
+
 			@prepareLabels()
 
 			header = $('<div>',
@@ -71,6 +74,8 @@ class Items
 
 			@initialized = true
 
+			@emit 'afterRender', @
+
 
 	prepareLabels: ->
 		if typeof @labels.title == 'undefined' then @labels.title = Items.labels.title
@@ -94,6 +99,8 @@ class Items
 
 
 	addTypeToSelection: (name) ->
+		@emit 'registerType', name, @
+
 		$('<option>',
 			value: name
 			html: @types[name]
@@ -145,6 +152,8 @@ class Items
 		if @select.find('option').length == 1
 			@select.hide()
 
+		@emit 'addType', name, @
+
 		if autoAddValue then addButton.click()
 
 
@@ -153,6 +162,8 @@ class Items
 		@addTypeToSelection(name)
 		if @select.is(':hidden') then @select.show()
 		@refreshOutputs()
+
+		@emit 'removeType', name, @
 
 
 	addValue: (type, value) ->
@@ -185,6 +196,8 @@ class Items
 		item.appendTo(list)
 
 		@refreshOutputs()
+
+		@emit 'addItem', type, value, @
 
 
 	getValues: ->
@@ -228,6 +241,8 @@ class Items
 
 
 	refreshOutputs: ->
+		@emit 'beforeRefresh', @
+
 		values = @getValues()
 
 		if @resultElement != null
@@ -247,6 +262,8 @@ class Items
 					ul.appendTo(type)
 
 				type.appendTo(list)
+
+		@emit 'afterRefresh', @
 
 
 module.exports = Items

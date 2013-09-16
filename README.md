@@ -2,6 +2,7 @@
 
 Modal dialog for writing items in groups (eg. contacts).
 Using [modal-dialog](https://npmjs.org/package/modal-dialog) package and is dependent on jquery.
+This dialog is also instance of [EventEmitter](http://nodejs.org/api/events.html).
 
 This dialog is completely without styles, so for styling you have to read more about [modal-dialog](https://npmjs.org/package/modal-dialog) package.
 
@@ -104,6 +105,24 @@ items.labels.title = 'Add contacts';
 
 You can of course use for example images instead of titles.
 
+## Events
+
+* `beforeRender` (items): Called right before first main render method is called
+* `afterRender` (items): Called right after first main render method is called
+* `registerType` (name, items): Called when there is new type added into select list
+* `addType`: (name, items): Called after person select new type and it is added into result
+* `removeType`: (name, items): Called after person remove type from result
+* `addItem`: (type, value, items): Called after person add new value into some type
+* `beforeRefresh`: (items): Called before summary refresh is called (eg. after adding new type)
+* `afterRefresh`: (items): Called after summary refresh is called (eg. after adding new type)
+
+Example:
+```
+items.on('addItem', function(type, value, items) {
+	console.log("Item '" + value + "' was added into '" + type + "' group.");
+});
+```
+
 ## Example
 
 ![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
@@ -114,6 +133,8 @@ You can of course use for example images instead of titles.
 	+ Switched edit and remove buttons
 	+ Adding new value is automatically called after new type is added
 	+ More options for setup labels (+ doc)
+	+ Items dialog is instance of EventEmitter
+	+ Added events
 
 * 1.0.2 - 1.0.3
 	+ Bug in rendering summary
