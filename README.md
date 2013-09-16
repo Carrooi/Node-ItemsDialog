@@ -69,6 +69,40 @@ If you want to render for example summary immediately after some setup, you have
 items.prepare();
 ```
 
+## Own labels and texts
+
+There is variable `labels` which holds all labels.
+
+The simplest option is to set own labels globally.
+
+```
+var Items = require('items-dialog');
+
+Items.labels.title = 'Add contacts';
+```
+
+or you can set it for each dialog
+
+```
+var Items = require('items-dialog');
+var items = new Items;
+
+items.labels.title = 'Add contacts';
+```
+
+### List of labels
+
+* `title`: Title of modal dialog
+* `okButton`: Button in the bottom of the modal dialog
+* `addTypeHint`: "prompt" text of first text in select input (eg. Please select something)
+* `removeType`: Title of link for removing whole type
+* `writeItem`: Text in prompt dialog for writing new item in type. There you can use %s "variable" which will be replaced with selected type (eg. Please enter new item into %s type)
+* `addItem`: Title of link for adding new item into type
+* `editItem`: Title of link for editing item
+* `removeItem`: Title of link for removing one item
+
+You can of course use for example images instead of titles.
+
 ## Example
 
 ![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
@@ -77,6 +111,8 @@ items.prepare();
 
 * 1.0.4
 	+ Switched edit and remove buttons
+	+ Adding new value is automatically called after new type is added
+	+ More options for setup labels (+ doc)
 
 * 1.0.2 - 1.0.3
 	+ Bug in rendering summary

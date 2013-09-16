@@ -23,6 +23,8 @@ class Items
 
 	defaults: null
 
+	labels: null
+
 
 	select: null
 
@@ -34,10 +36,13 @@ class Items
 	constructor: ->
 		@types = {}
 		@defaults = {}
+		@labels = {}
 
 
 	prepare: ->
 		if !@initialized
+			@prepareLabels()
+
 			header = $('<div>',
 				html: $('<span>' + Items.labels.title + '</span>')
 			)
@@ -66,6 +71,17 @@ class Items
 			@initialized = true
 
 
+	prepareLabels: ->
+		if typeof @labels.title == 'undefined' then @labels.title = Items.labels.title
+		if typeof @labels.addTypeHint == 'undefined' then @labels.addTypeHint = Items.labels.addTypeHint
+		if typeof @labels.removeType == 'undefined' then @labels.removeType = Items.labels.removeType
+		if typeof @labels.okButton == 'undefined' then @labels.okButton = Items.labels.okButton
+		if typeof @labels.writeItem == 'undefined' then @labels.writeItem = Items.labels.writeItem
+		if typeof @labels.removeItem == 'undefined' then @labels.removeItem = Items.labels.removeItem
+		if typeof @labels.editItem == 'undefined' then @labels.editItem = Items.labels.editItem
+		if typeof @labels.addItem == 'undefined' then @labels.addItem = Items.labels.addItem
+
+
 	open: ->
 		@prepare()
 		@dialog.show()
@@ -84,14 +100,14 @@ class Items
 
 	onSelectChange: =>
 		selected = @select.find(':selected')
-		@addType(selected.attr('value'))
+		@addType(selected.attr('value'), true)
 
 
-	addType: (name) ->
+	addType: (name, autoAddValue = false) ->
 		title = $('<h3>',
 			html: @types[name] + ' '
 		)
-		$('<a>',
+		addButton = $('<a>',
 			href: '#'
 			html: Items.labels.addItem
 			click: (e) =>
@@ -126,6 +142,8 @@ class Items
 
 		if @select.find('option').length == 1
 			@select.hide()
+
+		if autoAddValue then addButton.click()
 
 
 	removeType: (name) ->
