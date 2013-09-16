@@ -109,7 +109,7 @@ You can of course use for example images instead of titles.
 
 ## Changelog
 
-* 1.0.4
+* 1.1.0
 	+ Switched edit and remove buttons
 	+ Adding new value is automatically called after new type is added
 	+ More options for setup labels (+ doc)
