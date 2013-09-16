@@ -123,6 +123,8 @@ items.on('addItem', function(type, value, items) {
 });
 ```
 
+There are also events for modal dialog itself. This dialog object is accessible via `dialog` variable ([documentation](https://npmjs.org/package/modal-dialog)).
+
 ## Example
 
 ![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
