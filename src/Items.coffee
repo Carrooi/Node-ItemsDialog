@@ -143,15 +143,6 @@ class Items
 		item.append(' ')
 		$('<a>',
 			href: '#'
-			html: Items.labels.removeItem
-			click: (e) =>
-				e.preventDefault()
-				item.remove()
-				@refreshOutputs()
-		).appendTo(item)
-		item.append(' ')
-		$('<a>',
-			href: '#'
 			html: Items.labels.editItem
 			click: (e) =>
 				e.preventDefault()
@@ -160,6 +151,15 @@ class Items
 				if value != '' && value != null
 					item.find('span').html(value)
 					@refreshOutputs()
+		).appendTo(item)
+		item.append(' ')
+		$('<a>',
+			href: '#'
+			html: Items.labels.removeItem
+			click: (e) =>
+				e.preventDefault()
+				item.remove()
+				@refreshOutputs()
 		).appendTo(item)
 
 		item.appendTo(list)

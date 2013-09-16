@@ -75,7 +75,10 @@ items.prepare();
 
 ## Changelog
 
-* 1.0.2
+* 1.0.4
+	+ Switched edit and remove buttons
+
+* 1.0.2 - 1.0.3
 	+ Bug in rendering summary
 	+ Defaults from resume element
 
