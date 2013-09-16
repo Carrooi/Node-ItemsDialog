@@ -45,10 +45,10 @@ class Items
 			@prepareLabels()
 
 			header = $('<div>',
-				html: $('<span>' + Items.labels.title + '</span>')
+				html: $('<span>' + @labels.title + '</span>')
 			)
 			@select = $('<select>',
-				html: $('<option value="">' + Items.labels.addTypeHint + '</option>'),
+				html: $('<option value="">' + @labels.addTypeHint + '</option>'),
 				change: @onSelectChange
 			)
 			for name of @types
@@ -58,8 +58,8 @@ class Items
 
 			@dialog = new Dialog
 			@dialog.header = header
-			@dialog.content = $('<div class="container"><div class="help">' + Items.labels.help + '</div></div>')
-			@dialog.addButton( Items.labels.okButton, =>
+			@dialog.content = $('<div class="container"><div class="help">' + @labels.help + '</div></div>')
+			@dialog.addButton( @labels.okButton, =>
 				@dialog.hide()
 			)
 
@@ -111,11 +111,11 @@ class Items
 		)
 		addButton = $('<a>',
 			href: '#'
-			html: Items.labels.addItem
+			html: @labels.addItem
 			click: (e) =>
 				e.preventDefault()
 				name = $(e.target).closest('div.type').attr('data-name')
-				msg = Items.labels.writeItem.replace(/\%s/g, @types[name])
+				msg = @labels.writeItem.replace(/\%s/g, @types[name])
 				value = prompt(msg)
 				if value != '' && value != null
 					@addValue(name, value)
@@ -123,7 +123,7 @@ class Items
 		title.append(' ')
 		$('<a>',
 			href: '#'
-			html: Items.labels.removeType
+			html: @labels.removeType
 			click: (e) =>
 				e.preventDefault()
 				@removeType($(e.target).closest('div.type').attr('data-name'))
@@ -163,10 +163,10 @@ class Items
 		item.append(' ')
 		$('<a>',
 			href: '#'
-			html: Items.labels.editItem
+			html: @labels.editItem
 			click: (e) =>
 				e.preventDefault()
-				msg = Items.labels.writeItem.replace(/\%s/g, @types[type])
+				msg = @labels.writeItem.replace(/\%s/g, @types[type])
 				value = prompt(msg, value)
 				if value != '' && value != null
 					item.find('span').html(value)
@@ -175,7 +175,7 @@ class Items
 		item.append(' ')
 		$('<a>',
 			href: '#'
-			html: Items.labels.removeItem
+			html: @labels.removeItem
 			click: (e) =>
 				e.preventDefault()
 				item.remove()
