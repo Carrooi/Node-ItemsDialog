@@ -6,6 +6,12 @@ This dialog is also instance of [EventEmitter](http://nodejs.org/api/events.html
 
 This dialog is completely without styles, so for styling you have to read more about [modal-dialog](https://npmjs.org/package/modal-dialog) package.
 
+## Abandoned
+
+Unfortunately I don't have any more time to maintain this repository :-(
+
+![sad cat](https://raw.githubusercontent.com/sakren/sakren.github.io/master/images/sad-kitten.jpg)
+
 ## Usage
 
 ```
@@ -127,7 +133,7 @@ There are also events for modal dialog itself. This dialog object is accessible 
 
 ## Example
 
-![dialog](https://raw.github.com/sakren/node-items-dialog/master/example.png)
+![dialog](https://raw.github.com/Carrooi/Node-ItemsDialog/master/example.png)
 
 ## Changelog
 
