@@ -137,6 +137,10 @@ There are also events for modal dialog itself. This dialog object is accessible 
 
 ## Changelog
 
+* 1.1.1
+	+ Abandon package
+	+ Move under Carrooi organization
+
 * 1.1.0
 	+ Switched edit and remove buttons
 	+ Adding new value is automatically called after new type is added
